@@ -3,6 +3,8 @@
 여러 경로(앱리뷰·설문·전화메모·인스타DM)로 뒤섞여 들어온 카페 고객 피드백을
 **정리 → 분류 → 한 화면**으로 만들어, 사장님이 *"지금 가장 급한 불만"* 을 한눈에 보게 하는 도구.
 
+**🔗 라이브 데모**: https://fourth-app-tlxbic3f5zw7x8ewjlxbnp.streamlit.app/
+
 > Day 3 과제. 상세 설계는 [PRD.md](PRD.md), 제출물은 [SUBMISSION.md](SUBMISSION.md), 작업·판단 기록은 [Worklog.md](Worklog.md).
 
 ---

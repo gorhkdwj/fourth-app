@@ -1,9 +1,9 @@
 # 제출물 — Day 3 카페 VoC 한 화면
 
 ## 1. 동작하는 화면
-- 로컬 실행: `streamlit run app.py` → http://localhost:8501
-- (선택과제로 배포 시 여기에 공개 URL 추가)
-- 화면 구성: 유형별 지표 4개 → 🔥 가장 급한 불만 TOP 3 → 유형별 막대 → 전체 표(접이식)
+- **공개 URL**: https://fourth-app-tlxbic3f5zw7x8ewjlxbnp.streamlit.app/
+- 로컬 실행: `py src/run_pipeline.py` → `streamlit run app.py` (http://localhost:8501)
+- 화면 구성: 유형별 지표 4개 → 🔥 가장 급한 불만(미처리 TOP 3, 처리완료 워크큐) → 실패차원별 분포 → 전체 표(접이식)
 
 ## 2. '가장 급한 불만'을 어떻게 정의했는가 (한 줄)
 > **긴급도 = 심각도(S) × 불만강도(I), I = max(별점신호, 텍스트신호)** — 별점을 유일 기준으로 쓰지 않고, 서비스 실패 심각도(SERVQUAL '신뢰성' 최우선)와 고객 불만 강도(별점·텍스트 키워드/감정 중 더 위험한 쪽)를 곱했다. 이는 별점이 아니라 카테고리+키워드+감정강도로 우선순위를 매기는 CS·VoC 업계(Zendesk·IrisAgent·edesk) 방식과 같다. 동점은 금전 손실·환불 요구 건을 우선.
