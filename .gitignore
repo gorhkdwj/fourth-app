@@ -1,0 +1,14 @@
+# 런타임/캐시만 제외 — 데이터 CSV는 배포에 포함(데이터 없는 사람도 보게)
+__pycache__/
+*.pyc
+.DS_Store
+
+# 워크큐 처리상태(서버 인스턴스 임시값) — 공유/영속 대상 아님
+data/resolved.json
+
+# Claude Code 로컬 개인 설정(권한 등) — 공개 레포 제외. 단 .claude/skills/는 포함
+.claude/settings.local.json
+
+# 데이터 CSV는 일부러 추적함(배포 동봉):
+#   data/feedback_raw.csv, feedback_step1_dates.csv,
+#   data/classifications.csv, feedback_classified.csv
