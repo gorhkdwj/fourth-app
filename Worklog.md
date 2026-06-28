@@ -113,8 +113,29 @@
 - **Supabase 미채택**: 소규모 매장(연 수천 건)엔 CSV로 충분 — DB는 과설계(YAGNI). 배포+상태공유 등 trigger 충족 시에만.
 - **워딩**: 대시보드에서 '깨지다/화재' 등 자극적 표현 제거, 중립·전문 워딩.
 
-## 7. 남은 작업
-- **Streamlit Cloud 배포(#7)**: 사장님께 URL 공유. GitHub 레포 + 계정 + 외부 공개가 필요해 사용자 손이 들어가는 단계라 보류(태스크로 등록).
+## 7. 배포 (#7 완료)
+
+CSV를 동봉(정적 읽기)해 데이터 없는 사람도 URL만으로 보게 함.
+- 코드 측 준비: `.gitignore`(런타임만 제외, CSV 동봉) · README 배포 절차 · 'CSV만 있고 resolved.json 없는' fresh 복사본 렌더 확인.
+- `run_pipeline` 1회로 `classified.csv` 최신화 → GitHub 푸시: **https://github.com/gorhkdwj/fourth-app** (main).
+- 사용자가 Streamlit Cloud 연결 → **배포 완료**.
+- 푸시 제외: `resolved.json`, `__pycache__`, `.claude/settings.local.json`(로컬 개인설정).
+
+## 8. 운영 형태 판단 — 실매장은 '로컬'
+
+배포 후 확인: 처리완료가 새로고침에도 남는 이유 = 세션이 아니라 `data/resolved.json` **파일**에 쓰고(`save_resolved`) 매 실행 읽기(`load_resolved`) 때문.
+
+Streamlit Cloud의 한계(관찰됨):
+- **휘발**: 재부팅/재배포/슬립 시 `resolved.json` 초기화(레포 미포함 + 컨테이너 휘발성).
+- **공유**: 서버 파일 1개라 모든 방문자가 처리상태 공유(개인별 아님).
+
+→ **실제 단일 매장 관리자라면 로컬이 적합**: 처리상태가 디스크에 영구, 단일 사용자라 충돌 없음, PII 비공개. "처리완료=JSON, 신규=CSV append"는 이미 구현됨(`resolved.json`/`ingest.py`).
+- 후속: 관리자용 더블클릭 실행기(`run.bat`/`ingest.bat`)·백업 루틴은 **태스크 #11**로 등록.
+- 단, 신규 피드백 '분류'는 Claude(분류 Skill) 필요 — 보기·처리완료는 관리자 단독 가능, 새 데이터 분류는 주기적 Skill 실행.
+
+## 9. 남은 작업
+- **#11 로컬 운영 편의**: 관리자용 실행기·백업 루틴.
+- **#7 배포**: 코드/푸시/Cloud 연결 완료. (공개 URL을 README/SUBMISSION에 기재만 남음)
 
 ---
 

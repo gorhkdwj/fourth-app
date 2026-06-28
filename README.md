@@ -32,6 +32,15 @@ streamlit run app.py        # 브라우저에서 http://localhost:8501
 
 > 주의: 처리완료(`resolved.json`)는 서버 인스턴스 임시 저장이라 방문자 간 공유·영속되지 않는다(재배포 시 초기화). 공개 데이터의 민감정보(전화메모 등 PII)는 사전 점검.
 
+## 로컬 운영 (매장 관리자용) — 권장
+
+실매장 관리자는 공개 배포보다 **로컬 실행**이 적합하다: 처리상태가 디스크에 **영구 저장**(휘발 X), 단일 사용자라 충돌 없음, 데이터(PII)가 외부에 노출되지 않음.
+
+- **`run.bat`** (더블클릭): 데이터 재생성·검증 후 대시보드를 띄우고 브라우저를 연다. 터미널 불필요.
+- **`ingest.bat`**: 새 피드백 CSV를 창에 끌어다 놓거나 경로를 입력하면 `feedback_raw.csv`에 append + 중복 제거.
+- **백업**: 데이터가 파일(CSV + `resolved.json`)이라 **폴더 복사**나 로컬 git 커밋으로 끝.
+- **새 피드백 분류**: `ingest` 후 분류가 필요한 행은 분류 Skill(Claude)로 `classifications.csv`를 채운 뒤 `run.bat` 재실행. (보기·처리완료는 관리자 단독 가능)
+
 ---
 
 ## 데이터 흐름
@@ -80,6 +89,7 @@ app.py (Streamlit)                    유형 지표 · 급한 불만 TOP3 · 전
 ```
 Prac_01/
 ├─ app.py                     ③ 한 화면 (Streamlit)
+├─ run.bat · ingest.bat       관리자용 실행기(더블클릭)
 ├─ requirements.txt
 ├─ README.md · PRD.md · SUBMISSION.md · Worklog.md
 ├─ src/
